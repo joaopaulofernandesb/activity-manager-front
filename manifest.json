@@ -2,8 +2,10 @@
     "name": "Activity Manager",
     "short_name": "Activity",
     "description": "Gerenciador de atividades para o desenvolvimento",
-    "start_url": "/",
     "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/activity-manager-front/",
+    "start_url": "/activity-manager-front/",
     "background_color": "#ffffff",
     "theme_color": "#000000",
     "icons": [
@@ -17,6 +19,7 @@
         "sizes": "512x512",
         "type": "image/png"
       }
-    ]
+    ],
+    "splash_pages": null
   }
   
