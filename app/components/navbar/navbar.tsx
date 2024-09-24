@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, Moon, Sun } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from "../../../components/ui/button"
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger } from "../../../components/ui/sheet"
 
 const navItems = [
   { name: "Home", href: "/" },

@@ -3,14 +3,14 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, ChevronDown } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+} from "./ui/dropdown-menu"
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 
 const navItems = [
   { name: "Home", href: "/" },
