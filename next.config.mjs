@@ -1,12 +1,12 @@
-
 import withPWA from 'next-pwa';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: 'export',
-  basePath: '/activity-manager-front', 
-  assetPrefix: '/activity-manager-front/',  
+  basePath: process.env.NODE_ENV === "development" ? '' : '/activity-manager-front', 
+  assetPrefix: process.env.NODE_ENV === "development" ? '' : '/activity-manager-front/'  
 };
 
 export default withPWA({
