@@ -280,7 +280,15 @@ export default function ActivityManager() {
                 <div className="flex items-center">
                   <span className="text-xs text-muted-foreground flex items-center mr-4">
                     <Clock className="w-3 h-3 mr-1" />
-                    {activity.startTime}
+                    {new Date(activity.startTime).toLocaleString("pt-BR", {
+                      timeZone: "UTC",
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })}
                   </span>
                   <Button
                     onClick={() => stopActivity(activity._id)}
