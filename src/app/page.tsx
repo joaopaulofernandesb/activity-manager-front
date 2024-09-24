@@ -101,6 +101,9 @@ export default function ActivityManager() {
                   </SelectItem>
                   <SelectItem value="code review">Code Review</SelectItem>
                   <SelectItem value="auxilio">Auxílio a outro Dev</SelectItem>
+                  <SelectItem value="daily">Daily</SelectItem>
+                  <SelectItem value="planning">Planning</SelectItem>
+                  <SelectItem value="reunião">Reunião</SelectItem>
                 </SelectContent>
               </Select>
             </div>
