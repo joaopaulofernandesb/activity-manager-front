@@ -42,67 +42,7 @@ interface Activity {
   cardId: string;
 }
 
-export const getActivityIcon = (type: string) => {
-  switch (type) {
-    case "desenvolvimento":
-      return <Code className="w-5 h-5" />;
-    case "code review":
-      return <GitPullRequest className="w-5 h-5" />;
-    case "auxilio":
-      return <Users className="w-5 h-5" />;
-    case "daily":
-      return <Calendar className="w-5 h-5" />;
-    case "planning":
-      return <PieChart className="w-5 h-5" />;
-    case "reunião":
-      return <Monitor className="w-5 h-5" />;
-    case "teste":
-      return <FlaskConical className="w-5 h-5" />;
-    case "bug produção":
-      return <AlertCircle className="w-5 h-5" />;
-    case "story bug":
-      return <Bug className="w-5 h-5" />;
-    case "melhoria":
-      return <Zap className="w-5 h-5" />;
-    case "spike":
-      return <BookOpen className="w-5 h-5" />;
-    case "incidente":
-      return <Flame className="w-5 h-5" />;
-    default:
-      return <AlertCircle className="w-5 h-5" />;
-  }
-};
 
-export const getActivityColor = (type: string) => {
-  switch (type) {
-    case "desenvolvimento":
-      return "bg-blue-100 text-blue-600";
-    case "code review":
-      return "bg-green-100 text-green-600";
-    case "auxilio":
-      return "bg-yellow-100 text-yellow-600";
-    case "daily":
-      return "bg-orange-100 text-orange-600";
-    case "planning":
-      return "bg-pink-100 text-pink-600";
-    case "reunião":
-      return "bg-gray-100 text-gray-600";
-    case "teste":
-      return "bg-purple-100 text-purple-600";
-    case "bug produção":
-      return "bg-red-100 text-red-600";
-    case "story bug":
-      return "bg-red-200 text-red-700";
-    case "melhoria":
-      return "bg-teal-100 text-teal-600";
-    case "spike":
-      return "bg-indigo-100 text-indigo-600";
-    case "incidente":
-      return "bg-red-300 text-red-700";
-    default:
-      return "bg-gray-100 text-gray-600";
-  }
-};
 
 
 
@@ -173,6 +113,69 @@ export default function ActivityManager() {
   useEffect(() => {
     fetchOpenActivities();
   }, []);
+
+
+   const getActivityIcon = (type: string) => {
+    switch (type) {
+      case "desenvolvimento":
+        return <Code className="w-5 h-5" />;
+      case "code review":
+        return <GitPullRequest className="w-5 h-5" />;
+      case "auxilio":
+        return <Users className="w-5 h-5" />;
+      case "daily":
+        return <Calendar className="w-5 h-5" />;
+      case "planning":
+        return <PieChart className="w-5 h-5" />;
+      case "reunião":
+        return <Monitor className="w-5 h-5" />;
+      case "teste":
+        return <FlaskConical className="w-5 h-5" />;
+      case "bug produção":
+        return <AlertCircle className="w-5 h-5" />;
+      case "story bug":
+        return <Bug className="w-5 h-5" />;
+      case "melhoria":
+        return <Zap className="w-5 h-5" />;
+      case "spike":
+        return <BookOpen className="w-5 h-5" />;
+      case "incidente":
+        return <Flame className="w-5 h-5" />;
+      default:
+        return <AlertCircle className="w-5 h-5" />;
+    }
+  };
+  
+   const getActivityColor = (type: string) => {
+    switch (type) {
+      case "desenvolvimento":
+        return "bg-blue-100 text-blue-600";
+      case "code review":
+        return "bg-green-100 text-green-600";
+      case "auxilio":
+        return "bg-yellow-100 text-yellow-600";
+      case "daily":
+        return "bg-orange-100 text-orange-600";
+      case "planning":
+        return "bg-pink-100 text-pink-600";
+      case "reunião":
+        return "bg-gray-100 text-gray-600";
+      case "teste":
+        return "bg-purple-100 text-purple-600";
+      case "bug produção":
+        return "bg-red-100 text-red-600";
+      case "story bug":
+        return "bg-red-200 text-red-700";
+      case "melhoria":
+        return "bg-teal-100 text-teal-600";
+      case "spike":
+        return "bg-indigo-100 text-indigo-600";
+      case "incidente":
+        return "bg-red-300 text-red-700";
+      default:
+        return "bg-gray-100 text-gray-600";
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-4 space-y-6 container mx-auto p-6 bg-background text-foreground min-h-screen">
