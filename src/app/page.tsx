@@ -271,7 +271,7 @@ export default function ActivityManager() {
                     {getActivityIcon(activity.type)}
                   </div>
                   <div>
-                    <span className="font-medium text-sm">{activity.type}</span>
+                    <span className="font-medium text-sm">{activity.type.toUpperCase()}</span>
                     <p className="text-xs text-muted-foreground mt-1">
                       {activity.cardId}
                     </p>
