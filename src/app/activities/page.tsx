@@ -1,22 +1,27 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import {  useState } from 'react'
-import { Activity, Clock, Calendar } from 'lucide-react'
+import {  Key, useEffect, useState } from 'react'
+import { Activity, Clock, Calendar, Loader2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card"
 import { Input } from "../../components/ui/input"
 import { Button } from "../../components/ui/button"
 import axios from 'axios'
+import { getActivityColor, getActivityIcon } from '../page'
 
 interface ActivityLog {
+  _id: Key | null | undefined;
+  startTime: string | number | Date
+  cardId: string;
+  type: string;
   nomeCard: string,
   id: number;
   name: string;
-  duration: number; // Duração em segundos
+  duration: number; 
   date: string;
 }
 
-// Função para formatar a duração em horas, minutos e segundos
+
 const formatDuration = (duration: number) => {
   const hours = Math.floor(duration / 3600);
   const minutes = Math.floor((duration % 3600) / 60);
@@ -34,15 +39,16 @@ export default function ActivityTracker() {
   const [activities, setActivities] = useState<ActivityLog[]>([])
   const [date, setDate] = useState(() => {
     const today = new Date();
-    return today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+    return today.toISOString().split('T')[0];
   });
+  const [loading, setLoading] = useState(false);
 
-  // Função para buscar atividades da API
-  const fetchActivities = async () => {
-    if (!date) return; // Verificar se a data está selecionada
+  const fetchActivities = async (date?:any) => {
+    if (!date) return;
 
     try {
-      const response = await axios.get(`https://activity-manager-ruby.vercel.app/api/activities?date=${date}`) // Substitua pela sua URL da API
+      setLoading(true)
+      const response = await axios.get(`https://activity-manager-ruby.vercel.app/api/activities?date=${date}`)
       const fetchedActivities = response.data.map((activity: any) => ({
         id: activity._id,
         name: activity.type,
@@ -53,8 +59,14 @@ export default function ActivityTracker() {
       setActivities(fetchedActivities)
     } catch (error) {
       console.error('Erro ao buscar atividades', error);
+    }finally{
+      setLoading(false)
     }
   }
+
+  useEffect(()=>{
+    fetchActivities(date)
+  },[date])
 
   const totalDuration = activities.reduce((sum, activity) => sum + activity.duration, 0)
   const averageDuration = activities.length ? totalDuration / activities.length : 0
@@ -115,24 +127,50 @@ export default function ActivityTracker() {
           <CardTitle>Activity Log</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-8">
-            {activities.map((activity) => (
-              <div key={activity.id} className="flex items-center">
-                <div className="ml-4 space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                  ID do Card: {activity.nomeCard}
-                  </p>
-                  <p className="text-sm text-muted-foreground">atividade: {activity.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {formatDuration(activity.duration)} on {activity.date}
-                  </p>
+        {loading ? (
+        <div className="flex justify-center items-center h-64">
+          <Loader2 className="animate-spin w-8 h-8 text-gray-600" />
+        </div>
+      )  : null}
+        <div className="space-y-4">
+        {activities.map((activity) => (
+          <Card
+            key={activity.id}
+            className="overflow-hidden hover:shadow-md transition-shadow duration-300"
+          >
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 bg-secondary ${getActivityColor(
+                      activity.name
+                    )}`}
+                  >
+                    {getActivityIcon(activity.name)}
+                  </div>
+                  <div>
+                    <span className="font-medium text-sm">{activity.name.toUpperCase()}</span>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {activity.nomeCard}
+                    </p>
+                  </div>
                 </div>
-                <div className="ml-auto font-medium">Duração: {formatDuration(activity.duration)}</div>
+                <div className="flex items-center">
+                  <span className="text-xs text-muted-foreground flex items-center mr-4">
+                    <Clock className="w-3 h-3 mr-1" />
+                    {formatDuration(activity.duration)}
+                  </span>
+                 
+                </div>
               </div>
-            ))}
-          </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
         </CardContent>
       </Card>
+
+     
     </div>
   )
 }
